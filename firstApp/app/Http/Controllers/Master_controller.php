@@ -14,7 +14,7 @@ class Master_controller extends Controller
      */
     public function index_master()
     {
-        return view('backend/master');
+        return view('backend.index');
     }
 
     /**
