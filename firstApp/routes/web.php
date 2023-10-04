@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Master_controller;
 use App\Http\Controllers\Product_controller;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [Product_controller::class, 'index']);
+
+Route::get('/master', [Master_controller::class, 'index_master']);
