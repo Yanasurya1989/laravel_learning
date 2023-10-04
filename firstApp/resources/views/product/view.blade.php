@@ -23,24 +23,37 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Produk</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Gambar</th>
+                <th scope="col">Create at</th>
+                <th scope="col">updated at</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                    <a href="#" class="btn btn-primary">detil</a>
-                    <a href="#" class="btn btn-warning">update</a>
-                    <a href="#" class="btn btn-danger">delete</a>
-                </td>
-              </tr>
+              @foreach ($products as $list)
+                <tr>
+                  <th scope="row">{{$loop->iteration}}</th>
+                  <td>{{$list->nama_products}}</td>
+                  <td>{{$list->harga}}</td>
+                  <td>{{$list->stock}}</td>
+                  <td>{{$list->deskripsi}}</td>
+                  <td>
+                    {{-- <a href="http://localhost:8000{{ Storage::url($list->gambar_product) }}">{{ $list->gambar_product }}</a> --}}
+                    <img src="http://localhost:8000{{ Storage::url($list->gambar_product) }}" alt="" width="100">
+                  </td>
+                  <td>{{$list->created_at}}</td>
+                  <td>{{$list->updated_at}}</td>
+                  <td>
+                      <a href="#" class="btn btn-primary">detil</a>
+                      <a href="#" class="btn btn-warning">update</a>
+                      <a href="#" class="btn btn-danger">delete</a>
+                  </td>
+                </tr>
+              @endforeach
               
             </tbody>
           </table>

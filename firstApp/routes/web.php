@@ -21,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Product_controller::class, 'index']);
 Route::get('/insert', [Product_controller::class, 'create']);
+Route::post('/add', [Product_controller::class, 'store']);
 
 Route::get('/master', [Master_controller::class, 'index_master']);
