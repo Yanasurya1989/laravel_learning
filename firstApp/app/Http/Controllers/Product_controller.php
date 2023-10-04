@@ -24,7 +24,7 @@ class Product_controller extends Controller
      */
     public function create()
     {
-        //
+        return view('product/insert_form');
     }
 
     /**
