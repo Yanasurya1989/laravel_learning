@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col md-12">
           <h1>Daftar Product</h1>
-          <a href="/insert" class="btn btn-primary mb-3">Tambah Data</a>
+          <a href="/product/insert" class="btn btn-primary mb-3">Tambah Data</a>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -43,14 +43,14 @@
                   <td>{{$list->deskripsi}}</td>
                   <td>
                     {{-- <a href="http://localhost:8000{{ Storage::url($list->gambar_product) }}">{{ $list->gambar_product }}</a> --}}
-                    <img src="http://localhost:8000{{ Storage::url($list->gambar_product) }}" alt="" width="100">
+                    <img src="http://localhost:8000{{ Storage::url($list->gambar_product) }}" alt="" width="60">
                   </td>
                   <td>{{$list->created_at}}</td>
                   <td>{{$list->updated_at}}</td>
                   <td>
                       <a href="#" class="btn btn-primary">detil</a>
-                      <a href="#" class="btn btn-warning">update</a>
-                      <a href="#" class="btn btn-danger">delete</a>
+                      <a href="/edit/product/{{$list->id}}" class="btn btn-warning">update</a>
+                      <a href="/delete/product/{{$list->id}}" class="btn btn-danger" onclick="return confirm('Yakin?')">delete</a>
                   </td>
                 </tr>
               @endforeach

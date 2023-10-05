@@ -57,7 +57,7 @@ class Product_controller extends Controller
             'harga' => $request -> harga,
             'stock' => $request -> stock,
             'deskripsi' => $request -> deskripsi,
-            'gambar_products' => $request -> gambar_products,
+            'gambar_product' => $request -> gambar_product,
         ] ;
 
         if($request -> hasFile('gambar_product')){
@@ -99,7 +99,7 @@ class Product_controller extends Controller
      */
     public function edit(Product_model $product_model)
     {
-        //
+        return view('product/edit_form', compact('product_model'));
     }
 
     /**
@@ -111,7 +111,55 @@ class Product_controller extends Controller
      */
     public function update(Request $request, Product_model $product_model)
     {
-        //
+        // validasi data
+        $validator = Validator::make($request->all(),[
+            
+            'id' => 'required',
+            'nama_products' => 'required',
+            'harga' => 'required',
+            'stock' => 'required',
+            'deskripsi' => 'required',
+            'gambar_product' => 'required',
+        ]);
+
+        // menampilkan pesan eror
+        if($validator->fails()){
+            return back()->withErrors($validator->messages());
+        }
+
+        $data = [
+            'id' => request()->id,
+            'nama_products' => request()->nama_products,
+            'harga' => request()->harga,
+            'stock' => request()->stock,
+            'deskripsi' => request()->deskripsi,
+            'gambar_product' => request()->gambar_product,
+        ];
+
+        if($request->hasFile('gambar_product')){
+            if(Storage::get($product_model->gambar_product)){
+                Storage::delete($product_model->gambar_product);
+
+            }
+
+            $gambar_product = $request->file('gambar_product');
+
+            $path = Storage::putFileAs('public/images',$gambar_product,$gambar_product->getClientOriginalName());
+            $data['gambar_product'] = $path;
+        }
+
+        // jika data tidak eror maka yang ada di database diganti data form
+        $product_model = $product_model->update($data);
+
+        if($product_model){
+
+            // jika berhasil update tambahkan ke tampilan index
+            return Redirect()->to('/')->withSuccess('data berhasil diubah');
+        }else{
+
+            // jika gagal update maka akan dikembalikan ke form dengan pesan eror
+            return back()->withErrors('data gagal diubah');
+        }
     }
 
     /**
@@ -122,6 +170,22 @@ class Product_controller extends Controller
      */
     public function destroy(Product_model $product_model)
     {
-        //
+        // dd($product_model->gambar_product);
+
+        if(Storage::get($product_model->gambar_product)){
+            Storage::delete($product_model->gambar_product);
+
+        }
+
+        $product_model = $product_model -> delete();
+
+        // dd($product_model->$gambar_product);
+
+            if($product_model){
+                return back()->withSuccess('Data berhasil dihapus');
+            }else{
+                return back()->withErrors('Data gagal dihapus');
+            }
     }
+    
 }

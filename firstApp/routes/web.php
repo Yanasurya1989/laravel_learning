@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [Product_controller::class, 'index']);
-Route::get('/insert', [Product_controller::class, 'create']);
-Route::post('/add', [Product_controller::class, 'store']);
+Route::get('/product/insert', [Product_controller::class, 'create']);
+Route::post('/product/add', [Product_controller::class, 'store']);
+Route::get('/delete/product/{product_model}', [Product_controller::class, 'destroy']);
+Route::get('/edit/product/{product_model}', [Product_controller::class, 'edit']);
+Route::get('/update/product/{product_model}', [Product_controller::class, 'update']);
 
 Route::get('/master', [Master_controller::class, 'index_master']);
