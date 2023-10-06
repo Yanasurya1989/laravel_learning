@@ -17,13 +17,17 @@
                 <div class="container p-5">
                     <h1>Tambah Data Product</h1>
                     <a href="/" class="btn btn-primary mb-5">Kembali ke list</a>
-                    <form action="/update/{{ $product_model->id }}" method="post" enctype="multipart/form-data">
+                    <form action="/update/product/{{ $product_model->id }}" method="post" enctype="multipart/form-data">
                         @if(session('errors'))
                             <div class="alert alert-danger" role="alert">
                                 {{ (session('errors'))->first() }}
                             </div>
                         @endif
                         @csrf
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">id</label>
+                            <input type="text" class="form-control" id="id" name="id" value="{{$product_model->id}}">
+                        </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">nama_products</label>
                             <input type="text" class="form-control" id="nama_products" name="nama_products" value="{{$product_model->nama_products}}">
